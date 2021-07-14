@@ -1,0 +1,28 @@
+<div class="container">
+  
+  <section class="section">
+    <h1 class="title">Formulario basico</h1>
+
+    <div class="column is-full">
+      <!-- formulario con id formulario que sirve para llamarlo en esta pagina, por ejemplo en onSubmit o en .valid-->
+      <form #formulario="ngForm" (ngSubmit)="onSubmit(formulario)" novalidate>
+
+        <div class="control">
+          <label class="label">Username</label>
+          <input type="text" name="user" ngModel #user="ngModel" required />
+        </div>
+
+        <div class="control">
+          <label class="label">Email</label>
+          <input type="email" name="email" ngModel #email="ngModel" required />
+        </div>
+        <!-- Boton que será invalido si no tiene los campos requeridos-->
+        <input type="submit" [disabled]="!formulario.valid" />
+      </form>
+    </div>
+  </section>
+  Es valido?
+  {{ formulario.valid }}
+
+  <section></section>
+</div>

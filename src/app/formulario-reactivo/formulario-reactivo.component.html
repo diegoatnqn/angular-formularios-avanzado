@@ -1,0 +1,41 @@
+<div class="container">
+  <section class="section">
+    <h1 class="title">Formulario reactivo</h1>
+
+    <div class="column is-full">
+      <!-- envio form a controlador (archivo ts) en submit, envío por parametro el formulario  -->
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)"  novalidate>
+        <div class="control">
+          <label class="label">Username</label>
+          <input formControlName="name" class="input" />
+          <!-- Errores aca abajo, como divs que se muestran si hay error -->
+          <div class="error"
+               *ngIf="formulario.get('name')?.hasError('required')">
+            Por favor ingrese un nombre.
+          </div>
+          <div class="error"
+               *ngIf="formulario.get('name')?.hasError('minlength')">
+            minimo de 3 caracteres
+          </div>
+          <div class="error"
+               *ngIf="formulario.get('name')?.hasError('maxlength')">
+            Maximo de 8 caracteres
+          </div>
+        </div>
+
+        <div class="control">
+          <label class="label">Email</label>
+          <input formControlName="email" class="input" />
+        </div>
+
+        <input type="submit" [disabled]="!formulario.valid" />   <!-- el boton estara invalido si el form no es valido-->
+      </form>
+    </div>
+  </section>
+  <!-- Aqui se mostraran los errores actuales del form group "formularios" pipeados en tipo json-->
+  <section>
+    Hay errores? : <br />
+    Name: {{ formulario.controls.name.errors | json }}<br />
+    email: {{ formulario.controls.email.errors | json }}
+  </section>
+</div>
